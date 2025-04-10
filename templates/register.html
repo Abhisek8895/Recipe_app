@@ -1,0 +1,53 @@
+{% include "base.html" %}
+
+<div class="container mt-5">
+  
+    <form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h2>Register</h2>
+        <hr>
+        {% if messages %}
+        {% for message in messages %}
+          <div class="alert {% if 'success' in message.tags %}alert-success
+          {% elif 'error' in message.tags %}alert-danger
+          {% elif 'warning' in message.tags %}alert-warning
+          {% elif 'info' in message.tags %}alert-info
+          {% else %}alert-secondary{% endif %}" role="alert">
+            <!-- <p>This is meassage tag:- {{ message.tags }}</p> -->
+            {{ message }}
+          </div>     
+          {% endfor %}
+        {% endif %}
+
+        
+        <!-- <ul class="messages">
+            
+            <li{% if message.tags %} class=""{% endif %}>
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+                
+            </li>
+            
+        </ul> -->
+
+        <div class="mb-3">
+          <label class="form-label">First Name</label>
+          <input type="text" class="form-control" name="first_name" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Last Name</label>
+          <input type="text" class="form-control" name="last_name" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">User Name</label>
+          <input type="text" class="form-control" name="username" required>
+        </div>
+        <div class="mb-3">
+          <label  class="form-label">Password</label>
+          <input type="password" class="form-control" name="password" required>
+        </div>
+
+        <p>Already have account <a href="{% url 'login' %}">Login</a></p>
+
+        <button type="submit" class="btn btn-success">Register</button>
+      </form>
+</div>
